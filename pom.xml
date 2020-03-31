@@ -1,0 +1,295 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>centauri.academy</groupId>
+	<artifactId>cerepro.mail.manager</artifactId>
+	<version>0.8</version>
+	<packaging>jar</packaging>
+
+	<name>cerepro.mail.manager</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<maven.compiler.release>11</maven.compiler.release>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+<!-- 	<profiles> -->
+<!-- 		<profile> -->
+<!-- 			<id>dev</id> -->
+<!-- 			<properties> -->
+<!-- 				<env>mail.dev</env> -->
+<!-- 			</properties> -->
+<!-- 			<activation> -->
+<!-- 				<activeByDefault>true</activeByDefault> -->
+<!-- 			</activation> -->
+<!-- 			<build> -->
+<!-- 				<plugins> -->
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 						<artifactId>maven-compiler-plugin</artifactId> -->
+<!-- 						<version>3.8.1</version> -->
+<!-- 					</plugin> -->
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 						<artifactId>maven-antrun-plugin</artifactId> -->
+<!-- 						<version>1.8</version> -->
+<!-- 						<executions> -->
+<!-- 							<execution> -->
+<!-- 								<phase>test</phase> -->
+<!-- 								<goals> -->
+<!-- 									<goal>run</goal> -->
+<!-- 								</goals> -->
+<!-- 								<configuration> -->
+<!-- 									<tasks> -->
+<!-- 										<echo>selected dev profile</echo> -->
+
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.properties" /> -->
+<!-- 										<copy file="src/main/resources/mail.dev.properties" -->
+<!-- 											tofile="${project.build.outputDirectory}/mail.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.stage.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.test.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.dev.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.prod.properties" /> -->
+<!-- 										<echo>Using mail.dev.properties</echo> -->
+<!-- 									</tasks> -->
+<!-- 								</configuration> -->
+<!-- 							</execution> -->
+<!-- 						</executions> -->
+<!-- 					</plugin> -->
+<!-- 				</plugins> -->
+<!-- 			</build> -->
+<!-- 		</profile> -->
+<!-- 		<profile> -->
+<!-- 			<id>test</id> -->
+<!-- 			<properties> -->
+<!-- 				<env>mail.test</env> -->
+<!-- 			</properties> -->
+<!-- 			<build> -->
+<!-- 				<plugins> -->
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 						<artifactId>maven-compiler-plugin</artifactId> -->
+<!-- 						<version>3.8.1</version> -->
+<!-- 					</plugin> -->
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 						<artifactId>maven-antrun-plugin</artifactId> -->
+<!-- 						<version>1.1</version> -->
+<!-- 						<executions> -->
+<!-- 							<execution> -->
+<!-- 								<phase>test</phase> -->
+<!-- 								<goals> -->
+<!-- 									<goal>run</goal> -->
+<!-- 								</goals> -->
+<!-- 								<configuration> -->
+<!-- 									<tasks> -->
+<!-- 										<echo>selected test profile</echo> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.properties" /> -->
+<!-- 										<copy file="src/main/resources/mail.test.properties" -->
+<!-- 											tofile="${project.build.outputDirectory}/mail.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.stage.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.test.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.dev.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.prod.properties" /> -->
+<!-- 										<echo>Using mail.test.properties</echo> -->
+<!-- 									</tasks> -->
+<!-- 								</configuration> -->
+<!-- 							</execution> -->
+<!-- 						</executions> -->
+<!-- 					</plugin> -->
+<!-- 				</plugins> -->
+<!-- 			</build> -->
+<!-- 		</profile> -->
+<!-- 		<profile> -->
+<!-- 			<id>stage</id> -->
+<!-- 			<properties> -->
+<!-- 				<env>mail.stage</env> -->
+<!-- 			</properties> -->
+<!-- 			<build> -->
+<!-- 				<plugins> -->
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 						<artifactId>maven-compiler-plugin</artifactId> -->
+<!-- 						<version>3.8.1</version> -->
+<!-- 					</plugin> -->
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 						<artifactId>maven-antrun-plugin</artifactId> -->
+<!-- 						<version>1.1</version> -->
+<!-- 						<executions> -->
+<!-- 							<execution> -->
+<!-- 								<phase>test</phase> -->
+<!-- 								<goals> -->
+<!-- 									<goal>run</goal> -->
+<!-- 								</goals> -->
+<!-- 								<configuration> -->
+<!-- 									<tasks> -->
+<!-- 										<echo>selected stage profile</echo> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.properties" /> -->
+<!-- 										<copy file="src/main/resources/mail.stage.properties" -->
+<!-- 											tofile="${project.build.outputDirectory}/mail.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.stage.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.test.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.dev.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.prod.properties" /> -->
+<!-- 										<echo>Using mail.stage.properties</echo> -->
+<!-- 									</tasks> -->
+<!-- 								</configuration> -->
+<!-- 							</execution> -->
+<!-- 						</executions> -->
+<!-- 					</plugin> -->
+<!-- 				</plugins> -->
+<!-- 			</build> -->
+<!-- 		</profile> -->
+<!-- 		<profile> -->
+<!-- 			<id>prod</id> -->
+<!-- 			<properties> -->
+<!-- 				<env>mail.prod</env> -->
+<!-- 			</properties> -->
+<!-- 			<build> -->
+<!-- 				<plugins> -->
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 						<artifactId>maven-compiler-plugin</artifactId> -->
+<!-- 						<version>3.8.1</version> -->
+<!-- 					</plugin> -->
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 						<artifactId>maven-antrun-plugin</artifactId> -->
+<!-- 						<version>1.1</version> -->
+<!-- 						<executions> -->
+<!-- 							<execution> -->
+<!-- 								<phase>test</phase> -->
+<!-- 								<goals> -->
+<!-- 									<goal>run</goal> -->
+<!-- 								</goals> -->
+<!-- 								<configuration> -->
+<!-- 									<tasks> -->
+<!-- 										<echo>selected prod profile</echo> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.properties" /> -->
+<!-- 										<copy file="src/main/resources/mail.prod.properties" -->
+<!-- 											tofile="${project.build.outputDirectory}/mail.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.stage.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.test.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.dev.properties" /> -->
+<!-- 										<delete -->
+<!-- 											file="${project.build.outputDirectory}/mail.prod.properties" /> -->
+<!-- 										<echo>Using mail.prod.properties</echo> -->
+<!-- 									</tasks> -->
+<!-- 								</configuration> -->
+<!-- 							</execution> -->
+<!-- 						</executions> -->
+<!-- 					</plugin> -->
+<!-- 				</plugins> -->
+<!-- 			</build> -->
+<!-- 		</profile> -->
+<!-- 	</profiles> -->
+
+<!-- 	<build> -->
+<!-- 		<resources> -->
+<!-- 			<resource> -->
+<!-- 				<directory>src/main/resources</directory> -->
+<!-- 			</resource> -->
+<!-- 		</resources> -->
+<!-- 	</build> -->
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax.mail</groupId> -->
+<!-- 			<artifactId>mail</artifactId> -->
+<!-- 			<version>1.4.7</version> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
+
+
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<!-- <dependency> -->
+		<!-- <groupId>log4j</groupId> -->
+		<!-- <artifactId>log4j</artifactId> -->
+		<!-- <version>1.2.17</version> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<!-- API, java.xml.bind module -->
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+
+		<!-- Runtime, com.sun.xml.bind module -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+	</dependencies>
+</project>

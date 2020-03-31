@@ -1,0 +1,30 @@
+<html>
+
+<style>
+img {
+  max-width: 33%;
+  height: auto;}
+</style>
+
+<head>
+</head>
+<body>
+<p>$message</p>
+
+<img
+  src="http://www.proximainformatica.com/wp-content/uploads/2017/11/LOGO-PROXIMA-ROSSO-2017.png"
+  align=”bottom” />
+  
+<h3>  Persone, Passione, Innovazione  </h3>
+
+<p> ------------------------------------------------------------ </p>
+
+<h5> Questo messaggio di posta elettronica contiene informazioni di carattere confidenziale rivolte esclusivamente al/ai destinatario/i sopra indicato/i. E' vietato l'uso, la diffusione, distribuzione o riproduzione da parte di ogni altra persona. Ogni trasmissione, inoltro, diffusione o altro uso di queste informazioni a persone o societa' differenti dal destinatario e' proibita. Nel caso aveste ricevuto questo messaggio di posta elettronica per errore, siete pregati di segnalarlo immediatamente al mittente e distruggere quanto ricevuto (compresi i file allegati) senza farne copia. Qualsivoglia utilizzo non autorizzato del contenuto di questo messaggio costituisce violazione dell'obbligo di non prendere cognizione della corrispondenza tra altri soggetti, salvo piu' grave illecito, ed espone il responsabile alle relative conseguenze.
+Grazie per la collaborazione.</h5>
+
+<h5> This e-mail is confidential and may also contain privileged information. If you are not the intended recipient you are not authorised to read, print, save, process or disclose this message. Any review, retransmission, dissemination or other use of, or taking of any action in reliance upon, this information by persons or entities other than the intended recipient is prohibited.If you have received this message by mistake, please inform the sender immediately and delete this e-mail, its attachments and any copies. Any use, distribution, reproduction or disclosure by any person other than the intended recipient is strictly prohibited and the person responsible may incur penalties.
+Many thanks for your kind co-operation. </h5>
+
+</body>
+</html>
+
