@@ -333,6 +333,7 @@ public class MailUtility {
 	 * https://stackoverflow.com/questions/23057549/lambda-expression-to-convert-array-list-of-string-to-array-list-of-integers
 	 */
 	private static <T, U> U[] convertArray(T[] from, Function<T, U> func, IntFunction<U[]> generator) {
+		logger.info("convertArray - START - array to convert length: " + from.length);
 		return Arrays.stream(from).map(func).toArray(generator);
 	}
 }
