@@ -1,6 +1,10 @@
 package org.proxima.common.mail;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
+import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,24 +13,54 @@ import org.proxima.common.mail.MailUtility;
 
 public class MailUtilitiesTest {
 	
-	String mailRecipient = "m.franco@proximanetwork.it" ;
-	String mailRecipientCC = "m.franco@proximanetwork.it, maurizio.franco@ymail.com" ;
+	private static final Logger logger = LogManager.getLogger(MailUtilitiesTest.class);
 	
-	final Logger logger = LogManager.getLogger(MailUtilitiesTest.class);
+//	String mailRecipient = "m.franco@proximanetwork.it" ;
+	
+	private static String[] cc, ccn, to ;
+	
+	static {
+		try {
+		Properties props = new Properties();
+		props.load(MailUtility.class.getClassLoader().getResourceAsStream(MailUtility.MAILPROPS_FILENAME));
+		ccn = (props.getProperty(MailUtility.MAIL_CCN_RECIPIENT_KEY)).split(",");
+		cc = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT_KEY)).split(",");
+		to = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT_KEY)).split(",");
+		} catch (IOException ioe) {			
+			logger.error (ioe.getMessage(), ioe) ;
+		}
+	}
+	
 	@Test
-	public void sendSimpleMail() {
+	public void sendSimpleMailOk() {
 		
 		logger.info("#########");
 		logger.info("TEST - sendSimpleMail()");
 		logger.info("#########");
 		Boolean check=false;
 		try {
-			check = MailUtility.sendSimpleMail(mailRecipient, "Prova e-mail semplice", "<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
+			check = MailUtility.sendSimpleMail(to, "Prova e-mail semplice", "<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
 		} catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
 		assertTrue(check);
+	}
+	@Test
+	public void sendSimpleMailKo() {
+		
+		logger.info("#########");
+		logger.info("TEST - sendSimpleMail()");
+		logger.info("#########");
+		Boolean check=false;
+		try {
+			String[] recipients = null ;
+			check = MailUtility.sendSimpleMail(recipients, "Prova e-mail semplice", "<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		assertFalse(check);
 	}
 	
 	//test cc
@@ -38,7 +72,7 @@ public class MailUtilitiesTest {
 		logger.info("#########");
 		Boolean check=false;
 		try {
-			check = MailUtility.sendSimpleMailWithCc(mailRecipient, mailRecipientCC.split(","), "Prova e-mail con CC", "<p class=\"abcde\">Test send simple mail con CC avvenuto con successo!</p>");
+			check = MailUtility.sendSimpleMailWithCc(to, cc, "Prova e-mail con CC", "<p class=\"abcde\">Test send simple mail con CC avvenuto con successo!</p>");
 		} catch (Exception e) 
 		{
 			e.printStackTrace();
@@ -55,7 +89,7 @@ public class MailUtilitiesTest {
 	logger.info("#########");
 	Boolean check=false;
 	try {
-		check = MailUtility.sendSimpleMailWithCcAndCcn(mailRecipient, mailRecipientCC.split(","), mailRecipientCC.split(","), "Prova e-mail con CC e CCN", "<p class=\"abcde\">Test send simple mail con CC e CCN avvenuto con successo!</p>");
+		check = MailUtility.sendSimpleMailWithCcAndCcn(to, cc, ccn, "Prova e-mail con CC e CCN", "<p class=\"abcde\">Test send simple mail con CC e CCN avvenuto con successo!</p>");
 	} catch (Exception e) 
 	{
 		e.printStackTrace();
@@ -73,7 +107,7 @@ public class MailUtilitiesTest {
 		
 		Boolean check=false;
 		try {
-			check = MailUtility.sendSimpleMailWithDefaultCc(mailRecipient, "Prova e-mail con default CC", "<p class=\"abcde\">Test send simple mail con default CC avvenuto con successo!</p>");
+			check = MailUtility.sendSimpleMailWithDefaultCc(to, "Prova e-mail con default CC", "<p class=\"abcde\">Test send simple mail con default CC avvenuto con successo!</p>");
 		} catch (Exception e) 
 		{
 			e.printStackTrace();
@@ -91,11 +125,29 @@ public class MailUtilitiesTest {
 		
 		Boolean check=false;
 		try {
-			check = MailUtility.sendSimpleMailWithDefaultCcAndCcn(mailRecipient, "Prova e-email con default CC e CCN", "<p class=\"abcde\">Test send simple mail con default CC e CCN avvenuto con successo!</p>");
+			check = MailUtility.sendSimpleMailWithDefaultCcAndCcn(to, "Prova e-email con default CC e CCN", "<p class=\"abcde\">Test send simple mail con default CC e CCN avvenuto con successo!</p>");
 		} catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
 		assertTrue(check);
 	}
+	
+//	@Test 
+//	public void closeMailSessionKo() {
+//		
+//		logger.info("#########");
+//		logger.info("TEST - sendSimpleMailWithDefaultCcAndCcn()");
+//		logger.info("#########");
+//		
+//		Boolean check=false;
+//		try {
+//			MailUtility.c
+//			check = MailUtility.sendSimpleMailWithDefaultCcAndCcn(to, "Prova e-email con default CC e CCN", "<p class=\"abcde\">Test send simple mail con default CC e CCN avvenuto con successo!</p>");
+//		} catch (Exception e) 
+//		{
+//			e.printStackTrace();
+//		}
+//		assertTrue(check);
+//	}
 }
