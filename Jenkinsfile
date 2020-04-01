@@ -18,5 +18,10 @@ pipeline {
                 sh "./mvnw test"
             }
         }
+        stage("Code coverage") {
+            steps {              
+				jacoco(execPattern: 'target/jacoco.exec')
+            }
+        }
     }
 }
