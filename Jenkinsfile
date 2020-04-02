@@ -23,5 +23,10 @@ pipeline {
 				jacoco(execPattern: 'target/jacoco.exec')
             }
         }
+        stage("Install for DEV Environment") {
+            steps {              
+				sh "./mvnw install -DskipTests"
+            }
+        }
     }
 }
