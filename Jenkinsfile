@@ -29,7 +29,7 @@ pipeline {
 				)
             }
         }
-        stage("Install for DEV Environment") {
+        stage("Install for All Environments") {
             steps {              
 				sh "./mvnw install -DskipTests"
             }
