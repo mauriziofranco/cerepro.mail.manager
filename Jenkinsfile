@@ -6,7 +6,7 @@ pipeline {
                 sh "./mvnw clean compile"
             }
         }  
-        stage("Provides application property file for Unit test stage and DEV & STAGE environments") {
+        stage("Provides application property file for Integration tests(trying to send mails))") {
             steps {
                 sh "rm ./src/main/resources/mail.properties"
                 echo "Original ./src/main/resources/mail.properties successfully removed!!"
@@ -35,4 +35,11 @@ pipeline {
             }
         }
     }
+    post {
+		always {
+			mail to: 'm.franco@proximanetwork.it',
+			subject: "Completed Pipeline: ${currentBuild.fullDisplayName}",
+			body: "Your build completed, please check: ${env.BUILD_URL}"
+		}
+	}
 }
