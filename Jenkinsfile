@@ -21,6 +21,12 @@ pipeline {
         stage("Code coverage") {
             steps {              
 				jacoco(execPattern: 'target/jacoco.exec')
+				publishHTML (target: [
+				        reportDir: 'build/reports/jacoco/html',
+				        reportFiles: 'index.html',
+				        reportName: "JaCoCo Report"
+				    ]
+				)
             }
         }
         stage("Install for DEV Environment") {
