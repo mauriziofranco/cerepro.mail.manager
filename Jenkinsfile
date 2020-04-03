@@ -8,9 +8,9 @@ pipeline {
         }  
         stage("Provides application property file for Integration tests(trying to send mails))") {
             steps {
-                sh "rm ./src/main/resources/mail.properties"
-                echo "Original ./src/main/resources/mail.properties successfully removed!!"
-                sh "cp /cerepro_resources/properties/cerepro.mail.manager/mail.test.properties ./src/main/resources/mail.properties"
+                sh "rm ./src/test/resources/mail.properties"
+                echo "Original ./src/test/resources/mail.properties successfully removed!!"
+                sh "cp /cerepro_resources/properties/cerepro.mail.manager/mail.test.properties ./src/test/resources/mail.properties"
             }
         }      
         stage("Unit test") {
