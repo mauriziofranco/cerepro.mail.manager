@@ -42,6 +42,19 @@ public class MailUtilitiesTest {
 				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
 		assertTrue(check);
 	}
+	
+	@Test
+	public void sendSimpleMailOkSingle() {
+
+		logger.info("#########");
+		logger.info("TEST - sendSimpleMail()");
+		logger.info("#########");
+		Boolean check = false;
+		check = MailUtility.sendSimpleMail(singleRecipient, "Prova e-mail semplice",
+				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
+		assertTrue(check);
+	}
+	
 
 	@Test
 	public void sendSimpleMailKo() {
