@@ -42,6 +42,7 @@ public class MailUtilitiesTest {
 				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
 		assertTrue(check);
 	}
+<<<<<<< HEAD
 
 	@Test
 	public void sendSimpleMailKo() {
@@ -68,6 +69,8 @@ public class MailUtilitiesTest {
 				"<p class=\"abcde\">Test send simple mail con CC avvenuto con successo!</p>");
 		assertTrue(check);
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/MaurizioFranco/cerepro.mail.manager
 
 //	@Test
 //	public void sendSimpleMailWithCcSingleOk() {
