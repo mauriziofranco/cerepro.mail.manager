@@ -22,7 +22,7 @@ pipeline {
             steps {              
 				jacoco(execPattern: 'target/jacoco.exec')
 				publishHTML (target: [
-				        reportDir: 'target/site/jacoco/html',
+				        reportDir: 'target/site/jacoco',
 				        				        
 				        reportFiles: 'index.html',
 				        reportName: "JaCoCo Report"
