@@ -45,7 +45,7 @@ public class MailUtilitiesTest {
 	
 	@Test
 	public void sendSimpleMailSingleOk() {
-
+		//-
 		logger.info("#########");
 		logger.info("TEST - sendSimpleMail()");
 		logger.info("#########");
