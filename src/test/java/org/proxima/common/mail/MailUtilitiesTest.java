@@ -69,17 +69,17 @@ public class MailUtilitiesTest {
 		assertTrue(check);
 	}
 
-//	@Test
-//	public void sendSimpleMailWithCcSingleOk() {
-//
-//		logger.info("#########");
-//		logger.info("TEST - sendSimpleMailWithCcMultiOk()");
-//		logger.info("#########");
-//		Boolean check = false;
-//		check = MailUtility.sendSimpleMailWithCc(singleRecipient, singleRecipient, "Prova e-mail con CC",
-//				"<p class=\"abcde\">Test send simple mail con CC avvenuto con successo!</p>");
-//		assertTrue(check);
-//	}
+	
+	@Test
+	public void sendSimpleMailWithCcSingleOk() {
+		logger.info("#########");
+		logger.info("TEST - sendSimpleMailWithCcMultiOk()");
+		logger.info("#########");
+		Boolean check = false;
+		check = MailUtility.sendSimpleMailWithCc(singleRecipient, singleRecipient, "Prova e-mail con CC",
+				"<p class=\"abcde\">Test send simple mail con CC avvenuto con successo!</p>");
+		assertTrue(check);
+	}
 
 	// test bcc
 	@Test
