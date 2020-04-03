@@ -3,7 +3,7 @@ pipeline {
     stages {        
         stage("Compile") {
             steps {
-                sh "./mvnw compile"
+                sh "./mvnw clean compile"
             }
         }  
         stage("Provides application property file for Unit test stage and DEV & STAGE environments") {
