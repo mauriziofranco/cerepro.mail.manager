@@ -22,7 +22,11 @@ pipeline {
             steps {              
 				jacoco(execPattern: 'target/jacoco.exec')
 				publishHTML (target: [
+<<<<<<< HEAD
 				        reportDir: 'target/site/jacoco/html',
+=======
+				        reportDir: 'build/reports/jacoco/html',
+>>>>>>> branch 'master' of https://github.com/MaurizioFranco/cerepro.mail.manager
 				        reportFiles: 'index.html',
 				        reportName: "JaCoCo Report"
 				    ]
