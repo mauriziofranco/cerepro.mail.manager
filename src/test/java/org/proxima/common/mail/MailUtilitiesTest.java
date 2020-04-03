@@ -31,17 +31,17 @@ public class MailUtilitiesTest {
 		}
 	}
 
-//	@Test
-//	public void sendSimpleMailOk() {
-//
-//		logger.info("#########");
-//		logger.info("TEST - sendSimpleMail()");
-//		logger.info("#########");
-//		Boolean check = false;
-//		check = MailUtility.sendSimpleMail(to, "Prova e-mail semplice",
-//				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
-//		assertTrue(check);
-//	}
+	@Test
+	public void sendSimpleMailOk() {
+
+		logger.info("#########");
+		logger.info("TEST - sendSimpleMail()");
+		logger.info("#########");
+		Boolean check = false;
+		check = MailUtility.sendSimpleMail(to, "Prova e-mail semplice",
+				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
+		assertTrue(check);
+	}
 
 //	@Test
 //	public void sendSimpleMailKo() {
