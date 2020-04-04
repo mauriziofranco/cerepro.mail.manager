@@ -29,7 +29,7 @@ pipeline {
 				)
             }
         }
-        stage("Build and publish check-style report") {
+        stage("Build and publish code check-style report") {
             steps {
                 sh "./mvnw site"
                 publishHTML (target: [
