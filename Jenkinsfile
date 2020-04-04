@@ -29,6 +29,16 @@ pipeline {
 				)
             }
         }
+        stage("Build and publish check-style report") {
+            steps {
+                sh "./mvnw site"
+                publishHTML (target: [
+					reportDir: 'target/site/',
+					reportFiles: 'checkstyle.html',
+					reportName: "Checkstyle Report"
+				])
+            }
+        }
         stage("Install for All Environments") {
             steps {              
 				sh "./mvnw install -DskipTests"
