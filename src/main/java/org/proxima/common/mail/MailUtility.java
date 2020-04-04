@@ -37,10 +37,10 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
  * @version 3.0
  * 
  */
-public class MailUtility {
+public final class MailUtility {
 
 	private static StringWriter writer;
-	static final Logger logger = LogManager.getLogger(MailUtility.class);
+	static final Logger LOGGER = LogManager.getLogger(MailUtility.class);
 	private static Properties props;
 	
 	//properties file keys
@@ -49,25 +49,26 @@ public class MailUtility {
 	public final static String MAIL_CC_RECIPIENT_KEY = "mail.cc";
 	private static final String PWD_KEY = "mail.smtps.password";	
 
-	public static String[] MAIL_CC_RECIPIENT;
-	public static String[] MAIL_CCN_RECIPIENT;
-	
-	static final String CHARSET = "text/html; charset=utf-8";
+	private static String[] mailCcCecipient;
+	private static String[] mailCcnRecipient;
+	private static final String CHARSET = "text/html; charset=utf-8";
 	private static String EMAIL_ACCOUNT_PWD;
 
 	static {
 		try {
 			props = new Properties();
 			props.load(MailUtility.class.getClassLoader().getResourceAsStream(MailUtility.MAILPROPS_FILENAME));
-			MAIL_CCN_RECIPIENT = (props.getProperty(MailUtility.MAIL_CCN_RECIPIENT_KEY)).split(",");
-			MAIL_CC_RECIPIENT = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT_KEY)).split(",");
+			mailCcnRecipient = (props.getProperty(MailUtility.MAIL_CCN_RECIPIENT_KEY)).split(",");
+			mailCcCecipient = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT_KEY)).split(",");
 //		to = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT)).split(",");
 			EMAIL_ACCOUNT_PWD = props.getProperty(MailUtility.PWD_KEY);
 		} catch (IOException ioe) {
-			logger.error(ioe.getMessage(), ioe);
+			LOGGER.error(ioe.getMessage(), ioe);
 		}
 	}
 
+	private MailUtility () { }
+	
 	/**
 	 * Questo metodo permette di inviare una email specificando destinatario,
 	 * oggetto e messaggio.
@@ -148,7 +149,7 @@ public class MailUtility {
 	 *         sent.
 	 */
 	public static boolean sendSimpleMailWithDefaultCc(String[] recipients, String subject, String mess) {
-		return sendMail(recipients, MAIL_CC_RECIPIENT, null, subject, mess);
+		return sendMail(recipients, mailCcCecipient, null, subject, mess);
 	}
 
 	/**
@@ -184,7 +185,7 @@ public class MailUtility {
 	 */
 
 	public static boolean sendSimpleMailWithDefaultCcAndCcn(String[] recipients, String subject, String mess) {
-		return sendMail(recipients, MAIL_CC_RECIPIENT, MAIL_CCN_RECIPIENT, subject, mess);
+		return sendMail(recipients, mailCcCecipient, mailCcnRecipient, subject, mess);
 	}
 
 	/**
@@ -201,7 +202,7 @@ public class MailUtility {
 	 *         sent.
 	 */
 	private static boolean sendMail(String[] recipients, String[] cc, String[] ccn, String subject, String mess) {
-		logger.info("sendMail - START");
+		LOGGER.info("sendMail - START");
 		boolean sent = true;
 		try {
 
@@ -215,7 +216,7 @@ public class MailUtility {
 				try {
 					return new InternetAddress(x);
 				} catch (AddressException e) {
-					logger.error(e.getMessage(), e);
+					LOGGER.error(e.getMessage(), e);
 					e.printStackTrace();
 					return null;
 				}
@@ -234,7 +235,7 @@ public class MailUtility {
 					try {
 						return new InternetAddress(x);
 					} catch (AddressException e) {
-						logger.error(e.getMessage(), e);
+						LOGGER.error(e.getMessage(), e);
 						e.printStackTrace();
 						return null;
 					}
@@ -255,7 +256,7 @@ public class MailUtility {
 					try {
 						return new InternetAddress(x);
 					} catch (AddressException e) {
-						logger.error(e.getMessage(), e);
+						LOGGER.error(e.getMessage(), e);
 						e.printStackTrace();
 						return null;
 					}
@@ -269,9 +270,9 @@ public class MailUtility {
 			closeMailSession(mailSession, EMAIL_ACCOUNT_PWD, message);
 		} catch (Exception e) {
 			sent = false;
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
-		logger.info("sendMail - END - return value: " + sent);
+		LOGGER.info("sendMail - END - return value: " + sent);
 		return sent;
 	}
 
@@ -286,7 +287,7 @@ public class MailUtility {
 	 */
 
 	private static Session openMailSession(String mess) {
-		logger.info("openMailSession - START");
+		LOGGER.info("openMailSession - START");
 		Session mailSession = null;
 		VelocityEngine ve = new VelocityEngine();
 		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
@@ -299,7 +300,7 @@ public class MailUtility {
 		writer = new StringWriter();
 		t.merge(context, writer);
 		mailSession = Session.getDefaultInstance(props);
-		logger.info("openMailSession - END - return value: " + mailSession);
+		LOGGER.info("openMailSession - END - return value: " + mailSession);
 		return mailSession;
 	}
 
@@ -314,18 +315,18 @@ public class MailUtility {
 	 */
 
 	private static void closeMailSession(Session mailSession, String password, Message message) throws NoSuchProviderException, MessagingException {
-		logger.info("closeMailSession - START");
+		LOGGER.info("closeMailSession - START");
 //		try {
-			logger.info("Initialize mail session...");
+			LOGGER.info("Initialize mail session...");
 			Transport tr = mailSession.getTransport();
-			logger.info("Initialize mail transport...");
+			LOGGER.info("Initialize mail transport...");
 			tr.connect(null, password);
 			tr.sendMessage(message, message.getAllRecipients());
 			tr.close();
 //		} catch (Exception e) {
 //			logger.error(e.getMessage(), e);
 //		}
-		logger.info("closeMailSession - END");
+		LOGGER.info("closeMailSession - END");
 	}
 
 	/*
@@ -333,7 +334,7 @@ public class MailUtility {
 	 * https://stackoverflow.com/questions/23057549/lambda-expression-to-convert-array-list-of-string-to-array-list-of-integers
 	 */
 	private static <T, U> U[] convertArray(T[] from, Function<T, U> func, IntFunction<U[]> generator) {
-		logger.info("convertArray - START - array to convert length: " + from.length);
+		LOGGER.info("convertArray - START - array to convert length: " + from.length);
 		return Arrays.stream(from).map(func).toArray(generator);
 	}
 }

@@ -13,7 +13,7 @@ import org.proxima.common.mail.MailUtility;
 
 public class MailUtilitiesTest {
 
-	private static final Logger logger = LogManager.getLogger(MailUtilitiesTest.class);
+	private static final Logger LOGGER = LogManager.getLogger(MailUtilitiesTest.class);
 
 	private static String[] cc, ccn, to;
 	private static String singleRecipient;
@@ -27,16 +27,16 @@ public class MailUtilitiesTest {
 			to = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT_KEY)).split(",");
 			singleRecipient = cc[0];
 		} catch (IOException ioe) {
-			logger.error(ioe.getMessage(), ioe);
+			LOGGER.error(ioe.getMessage(), ioe);
 		}
 	}
 
 	@Test
 	public void sendSimpleMailOk() {
 
-		logger.info("#########");
-		logger.info("TEST - sendSimpleMail()");
-		logger.info("#########");
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMail()");
+		LOGGER.info("#########");
 		Boolean check = false;
 		check = MailUtility.sendSimpleMail(to, "Prova e-mail semplice",
 				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
@@ -46,9 +46,9 @@ public class MailUtilitiesTest {
 	@Test
 	public void sendSimpleMailSingleOk() {
 		//-
-		logger.info("#########");
-		logger.info("TEST - sendSimpleMail()");
-		logger.info("#########");
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMail()");
+		LOGGER.info("#########");
 		Boolean check = false;
 		check = MailUtility.sendSimpleMail(singleRecipient, "Prova e-mail semplice",
 				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
@@ -59,9 +59,9 @@ public class MailUtilitiesTest {
 	@Test
 	public void sendSimpleMailKo() {
 
-		logger.info("#########");
-		logger.info("TEST - sendSimpleMail()");
-		logger.info("#########");
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMail()");
+		LOGGER.info("#########");
 		Boolean check = false;
 		String[] recipients = null;
 		check = MailUtility.sendSimpleMail(recipients, "Prova e-mail semplice",
@@ -73,9 +73,9 @@ public class MailUtilitiesTest {
 	@Test
 	public void sendSimpleMailWithCc() {
 
-		logger.info("#########");
-		logger.info("TEST - sendSimpleMailWithCc()");
-		logger.info("#########");
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMailWithCc()");
+		LOGGER.info("#########");
 		Boolean check = false;
 		check = MailUtility.sendSimpleMailWithCc(to, cc, "Prova e-mail con CC",
 				"<p class=\"abcde\">Test send simple mail con CC avvenuto con successo!</p>");
@@ -85,9 +85,9 @@ public class MailUtilitiesTest {
 	
 	@Test
 	public void sendSimpleMailWithCcSingleOk() {
-		logger.info("#########");
-		logger.info("TEST - sendSimpleMailWithCcMultiOk()");
-		logger.info("#########");
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMailWithCcMultiOk()");
+		LOGGER.info("#########");
 		Boolean check = false;
 		check = MailUtility.sendSimpleMailWithCc(singleRecipient, singleRecipient, "Prova e-mail con CC",
 				"<p class=\"abcde\">Test send simple mail con CC avvenuto con successo!</p>");
@@ -98,9 +98,9 @@ public class MailUtilitiesTest {
 	@Test
 	public void sendSimpleMailWithCcAndCcn() {
 
-		logger.info("#########");
-		logger.info("TEST - sendSimpleMailWithCcAndCcn()");
-		logger.info("#########");
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMailWithCcAndCcn()");
+		LOGGER.info("#########");
 		Boolean check = false;
 		check = MailUtility.sendSimpleMailWithCcAndCcn(to, cc, ccn, "Prova e-mail con CC e CCN",
 				"<p class=\"abcde\">Test send simple mail con CC e CCN avvenuto con successo!</p>");
@@ -111,9 +111,9 @@ public class MailUtilitiesTest {
 	@Test
 	public void sendSimpleMailWithDefaultCc() {
 
-		logger.info("#########");
-		logger.info("TEST - sendSimpleMailWithDefaultCc()");
-		logger.info("#########");
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMailWithDefaultCc()");
+		LOGGER.info("#########");
 
 		Boolean check = false;
 		check = MailUtility.sendSimpleMailWithDefaultCc(to, "Prova e-mail con default CC",
@@ -125,9 +125,9 @@ public class MailUtilitiesTest {
 	@Test
 	public void sendSimpleMailWithDefaultCcAndCcn() {
 
-		logger.info("#########");
-		logger.info("TEST - sendSimpleMailWithDefaultCcAndCcn()");
-		logger.info("#########");
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMailWithDefaultCcAndCcn()");
+		LOGGER.info("#########");
 
 		Boolean check = false;
 		check = MailUtility.sendSimpleMailWithDefaultCcAndCcn(to, "Prova e-email con default CC e CCN",
