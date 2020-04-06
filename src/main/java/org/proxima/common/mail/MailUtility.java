@@ -74,7 +74,6 @@ public final class MailUtility {
 	 * @param recipient, recipient email address
 	 * @param subject,   email subject
 	 * @param mess,      email text message
-	 * 
 	 * @return boolean, false if exception thrown. Else, true every time mail
 	 *         correctly sent.
 	 */
