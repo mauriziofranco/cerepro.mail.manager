@@ -79,15 +79,13 @@ public final class MailUtility {
 	 * @return boolean, false if exception thrown. Else, true every time mail
 	 *         correctly sent.
 	 */
-
 	public static boolean sendSimpleMail(String recipient, String subject, String mess) {
 		String[] recipients = { recipient };
 		return sendSimpleMail(recipients, subject, mess);
 	}
 
 	/**
-	 * Questo metodo permette di inviare una email specificando destinatario,
-	 * oggetto e messaggio.
+	 * Provides to send simple mail to multiple recipients
 	 * 
 	 * @param recipient E-mail del destinatario
 	 * @param subject   Oggetto della e-mail
