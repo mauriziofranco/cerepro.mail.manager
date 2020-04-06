@@ -33,9 +33,7 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
  * @author DaniG - Milan Centauri Academy I
  * @author TraianC - Milano Centauri Academy III
  * @author Maurizio Franco - maurizio.franco@ymail.com
- * 
  * @version 3.0
- * 
  */
 public final class MailUtility {
 
