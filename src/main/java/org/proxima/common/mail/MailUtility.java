@@ -49,7 +49,7 @@ public final class MailUtility {
 	public final static String MAIL_CC_RECIPIENT_KEY = "mail.cc";
 	private static final String PWD_KEY = "mail.smtps.password";	
 
-	private static String[] mailCcCecipient;
+	private static String[] mailCcRecipient;
 	private static String[] mailCcnRecipient;
 	private static final String CHARSET = "text/html; charset=utf-8";
 	private static String EMAIL_ACCOUNT_PWD;
@@ -59,8 +59,7 @@ public final class MailUtility {
 			props = new Properties();
 			props.load(MailUtility.class.getClassLoader().getResourceAsStream(MailUtility.MAILPROPS_FILENAME));
 			mailCcnRecipient = (props.getProperty(MailUtility.MAIL_CCN_RECIPIENT_KEY)).split(",");
-			mailCcCecipient = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT_KEY)).split(",");
-//		to = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT)).split(",");
+			mailCcRecipient = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT_KEY)).split(",");
 			EMAIL_ACCOUNT_PWD = props.getProperty(MailUtility.PWD_KEY);
 		} catch (IOException ioe) {
 			LOGGER.error(ioe.getMessage(), ioe);
@@ -149,7 +148,7 @@ public final class MailUtility {
 	 *         sent.
 	 */
 	public static boolean sendSimpleMailWithDefaultCc(String[] recipients, String subject, String mess) {
-		return sendMail(recipients, mailCcCecipient, null, subject, mess);
+		return sendMail(recipients, mailCcRecipient, null, subject, mess);
 	}
 
 	/**
@@ -185,7 +184,7 @@ public final class MailUtility {
 	 */
 
 	public static boolean sendSimpleMailWithDefaultCcAndCcn(String[] recipients, String subject, String mess) {
-		return sendMail(recipients, mailCcCecipient, mailCcnRecipient, subject, mess);
+		return sendMail(recipients, mailCcRecipient, mailCcnRecipient, subject, mess);
 	}
 
 	/**
