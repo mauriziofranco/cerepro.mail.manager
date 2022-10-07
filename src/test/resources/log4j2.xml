@@ -10,16 +10,9 @@
         </File>
     </Appenders>
     <Loggers>
-<!--         <Root level="INFO"> -->
-<!--             <AppenderRef ref="Console" /> -->
-<!--             <AppenderRef ref="LogFile"/> -->
-<!--         </Root> -->
-        <Root level="INFO" additivity="false">
-	        <AppenderRef level="INFO" ref="Console" />
-	     </Root>
-	    <Logger name="org.proxima.common.mail" level="INFO"
-	        additivity="false">
-	        <Appender-ref ref="LogFile" level="INFO" />
-	    </Logger>
+        <Root level="INFO">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="LogFile"/>
+        </Root>
     </Loggers>
 </Configuration>
