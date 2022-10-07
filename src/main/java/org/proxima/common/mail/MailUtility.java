@@ -195,7 +195,7 @@ public final class MailUtility {
 	 *         sent.
 	 */
 	private static boolean sendMail(String[] recipients, String[] cc, String[] ccn, String subject, String mess) {
-		LOGGER.info("sendMail - START");
+		LOGGER.info("sendMail - START - recipients.length" + recipients.length);
 		boolean sent = true;
 		try {
 
