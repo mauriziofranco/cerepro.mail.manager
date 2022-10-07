@@ -5,7 +5,7 @@
 
 	<groupId>centauri.academy</groupId>
 	<artifactId>cerepro.mail.manager</artifactId>
-	<version>0.9.1</version>
+	<version>0.9.2</version>
 	<packaging>jar</packaging>
 
 	<name>cerepro.mail.manager</name>
