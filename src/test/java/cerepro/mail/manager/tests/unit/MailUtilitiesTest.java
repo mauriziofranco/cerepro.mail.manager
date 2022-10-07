@@ -55,18 +55,18 @@ public class MailUtilitiesTest {
 	}
 	
 
-//	@Test
-//	public void sendSimpleMailKo() {
-//
-//		LOGGER.info("#########");
-//		LOGGER.info("TEST - sendSimpleMailKo()");
-//		LOGGER.info("#########");
-//		Boolean check = false;
-//		String[] recipients = null;
-//		check = MailUtility.sendSimpleMail(recipients, "Prova e-mail semplice",
-//				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
-//		assertFalse(check);
-//	}
+	@Test
+	public void sendSimpleMailKo() {
+
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMailKo()");
+		LOGGER.info("#########");
+		Boolean check = false;
+		String[] recipients = null;
+		check = MailUtility.sendSimpleMail(recipients, "Prova e-mail semplice",
+				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
+		assertFalse(check);
+	}
 
 	// test cc
 	@Test
