@@ -48,8 +48,7 @@ pipeline {
     post {
 		always {
 		
-			subject: "Completed pipeline: ${currentBuild.fullDisplayName}",
-			body: "Your build completed, please check: ${env.BUILD_URL}"
+			emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
 		}
 	}
 }
