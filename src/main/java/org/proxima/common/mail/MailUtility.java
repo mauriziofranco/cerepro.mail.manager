@@ -205,6 +205,7 @@ public final class MailUtility {
 
 			String messageContent = writer.toString();
 			MimeMessage message = new MimeMessage(mailSession);
+			LOGGER.info("sendMail - DEBUG - converting recipients; recipients.length: " + recipients.length);
 			Address[] iaRecipients = convertArray(recipients, (x -> {
 				try {
 					return new InternetAddress(x);
@@ -224,6 +225,7 @@ public final class MailUtility {
 //				for (int i = 0; i < ccAddress.length; i++) {
 //					message.addRecipient(RecipientType.CC, ccAddress[i]);
 //				}
+				LOGGER.info("sendMail - DEBUG - converting cc; cc.length: " + cc.length);
 				Address[] ccAddress = convertArray(cc, (x -> {
 					try {
 						return new InternetAddress(x);
@@ -245,6 +247,7 @@ public final class MailUtility {
 //				for (int i = 0; i < ccnAddress.length; i++) {
 //					message.addRecipient(RecipientType.BCC, ccnAddress[i]);
 //				}
+				LOGGER.info("sendMail - DEBUG - converting ccn; ccn.length: " + ccn.length);
 				Address[] ccnAddress = convertArray(ccn, (x -> {
 					try {
 						return new InternetAddress(x);
