@@ -59,7 +59,7 @@ public class MailUtilitiesTest {
 	public void sendSimpleMailKo() {
 
 		LOGGER.info("#########");
-		LOGGER.info("TEST - sendSimpleMail()");
+		LOGGER.info("TEST - sendSimpleMailKo()");
 		LOGGER.info("#########");
 		Boolean check = false;
 		String[] recipients = null;
