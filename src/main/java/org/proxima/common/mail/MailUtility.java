@@ -90,6 +90,7 @@ public final class MailUtility {
 	 * @return boolean Il metodo ritorna false solo se viene sollevata un'eccezione.
 	 */
 	public static boolean sendSimpleMail(String[] recipients, String subject, String mess) {
+		LOGGER.info("sendSimpleMail - START");
 		return sendMail(recipients, null, null, subject, mess);
 	}
 
@@ -195,7 +196,7 @@ public final class MailUtility {
 	 *         sent.
 	 */
 	private static boolean sendMail(String[] recipients, String[] cc, String[] ccn, String subject, String mess) {
-		LOGGER.info("sendMail - START - recipients.length" + recipients.length);
+		LOGGER.info("sendMail - START");
 		boolean sent = true;
 		try {
 
