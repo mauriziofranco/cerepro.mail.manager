@@ -11,8 +11,8 @@
     </Appenders>
     <Loggers>
         <Root level="INFO">
-            <AppenderRef ref="Console" />
-            <AppenderRef ref="LogFile"/>
+            <AppenderRef name="org.proxima.common.mail" ref="Console" />
+            <AppenderRef name="org.proxima.common.mail" ref="LogFile"/>
         </Root>
     </Loggers>
 </Configuration>
