@@ -48,7 +48,7 @@ pipeline {
     post {
 		always {
 		
-			emailext body: 'A Test EMail', 
+			emailext body: 'A Test EMail from cerepro.mail.manager', 
 				recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
 					[$class: 'RequesterRecipientProvider']], 
 					subject: 'Test'
