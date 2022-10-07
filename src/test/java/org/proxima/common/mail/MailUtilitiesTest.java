@@ -1,4 +1,4 @@
-package cerepro.mail.manager.tests.unit;
+package org.proxima.common.mail;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
