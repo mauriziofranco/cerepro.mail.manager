@@ -15,7 +15,7 @@
 <!--             <AppenderRef ref="LogFile"/> -->
 <!--         </Root> -->
         <Root level="INFO" additivity="false">
-	        <AppenderRef level="INFO" ref="CONSOLE" />
+	        <AppenderRef level="INFO" ref="Console" />
 	     </Root>
 	    <Logger name="org.proxima.common.mail" level="INFO"
 	        additivity="false">
