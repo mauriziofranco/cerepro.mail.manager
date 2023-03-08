@@ -41,6 +41,7 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
  * @author Antonio Iannaccone - Roma Academy VII 
  *
  */
+
 public final class MailUtility {
 
 	private static StringWriter writer;
