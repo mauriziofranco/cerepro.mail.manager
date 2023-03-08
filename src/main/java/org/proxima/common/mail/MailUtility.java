@@ -7,6 +7,9 @@ import java.util.Properties;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -15,8 +18,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
+import javax.mail.internet.MimeMultipart;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,13 +32,14 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 /**
- * Provides a series of utilities mail to send mail: simple, with cc and ccn
+ * Provides a series of utilities mail to send mail: simple, with an attachment, with cc and ccn
  * recipients.
  * 
  * @author DaniG - Milan Centauri Academy I
  * @author TraianC - Milano Centauri Academy III
  * @author Maurizio Franco - maurizio.franco@ymail.com
- * @version 3.0
+ * @author Antonio Iannaccone - Roma Academy VII 
+ *
  */
 public final class MailUtility {
 
@@ -92,6 +98,79 @@ public final class MailUtility {
 	public static boolean sendSimpleMail(String[] recipients, String subject, String mess) {
 		LOGGER.info("sendSimpleMail - START");
 		return sendMail(recipients, null, null, subject, mess);
+	}
+	
+	/**
+	 * Provides to send mail with attachment to a single recipient
+	 *
+	 * @param recipient E-mail del destinatario
+	 * @param subject   Oggetto della e-mail
+	 * @param mess      Testo della e-mail
+	 * @param attachmentPath Path del file da allegare all'e-mail
+	 * @param attachmentName Nome con cui salvare il file allegato all'e-mail
+	 * 
+	 * @return boolean Il metodo ritorna false solo se viene sollevata un'eccezione.
+	 */
+	public static boolean sendMailWithAttachment(String recipient, String subject, String mess, String attachmentPath, String attachmentName) {
+	    String[] recipients = {recipient};
+	    return sendMailWithAttachment(recipients, subject, mess, attachmentPath, attachmentName);
+	}
+
+	/**
+	 * Provides to send mail with attachment to multiple recipients
+	 *
+	 * @param recipients Multi recipients email addresses
+	 * @param subject    Email subject
+	 * @param mess       Email text message
+	 * @param attachmentPath Path del file da allegare all'e-mail
+	 * @param attachmentName Nome con cui salvare il file allegato all'e-mail
+	 *
+	 * @return boolean Il metodo ritorna false solo se viene sollevata un'eccezione.
+	 */
+	public static boolean sendMailWithAttachment(String[] recipients, String subject, String mess, String attachmentPath, String attachmentName) {
+	    LOGGER.info("sendMailWithAttachment - START");
+	    boolean sent = true;
+	    try {
+	        writer = new StringWriter();
+
+	        Session mailSession = openMailSession(mess);
+
+	        String messageContent = writer.toString();
+	        MimeMessage message = new MimeMessage(mailSession);
+	        LOGGER.info("sendMailWithAttachment - DEBUG - converting recipients; recipients.length: " + recipients.length);
+	        Address[] iaRecipients = convertArray(recipients, (x -> {
+	            try {
+	                return new InternetAddress(x);
+	            } catch (AddressException e) {
+	                LOGGER.error(e.getMessage(), e);
+	                e.printStackTrace();
+	                return null;
+	            }
+	        }), Address[]::new);
+	        message.addRecipients(RecipientType.TO, iaRecipients);
+
+	        message.setSubject(subject);
+
+	        MimeMultipart multipart = new MimeMultipart();
+	        MimeBodyPart messageBodyPart = new MimeBodyPart();
+	        messageBodyPart.setContent(messageContent, CHARSET);
+	        multipart.addBodyPart(messageBodyPart);
+
+	        messageBodyPart = new MimeBodyPart();
+	        DataSource source = new FileDataSource(attachmentPath);
+	        messageBodyPart.setDataHandler(new DataHandler(source));
+	        messageBodyPart.setFileName(attachmentName);
+	        multipart.addBodyPart(messageBodyPart);
+
+	        message.setContent(multipart);
+
+	        closeMailSession(mailSession, EMAIL_ACCOUNT_PWD, message);
+	    } catch (Exception e) {
+	        sent = false;
+	        LOGGER.error(e.getMessage(), e);
+	    }
+	    LOGGER.info("sendMailWithAttachment - END - return value: " + sent);
+	    return sent;
 	}
 
 	/**
