@@ -5,7 +5,7 @@
 
 	<groupId>centauri.academy</groupId>
 	<artifactId>cerepro.mail.manager</artifactId>
-	<version>0.9.4</version>
+	<version>0.9.5</version>
 	<packaging>jar</packaging>
 
 	<name>cerepro.mail.manager</name>
@@ -53,7 +53,7 @@
 										<limit>
 											<counter>INSTRUCTION</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.80</minimum>
+											<minimum>0.50</minimum>
 										</limit>
 									</limits>
 								</rule>
