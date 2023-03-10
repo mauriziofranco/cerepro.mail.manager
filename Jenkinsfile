@@ -1,5 +1,11 @@
 pipeline {
+    /*
     agent any
+    */
+    agent { 
+	    label 'jenkins-slave-graffias-jdk11' 
+	    
+	}
     stages {        
         stage("Compile") {
             steps {
