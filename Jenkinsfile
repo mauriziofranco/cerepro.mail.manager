@@ -1,11 +1,16 @@
 pipeline {
     /*
     agent any
-    */
+    
     agent { 
 	    label 'jenkins-slave-graffias-jdk11' 
 	    
 	}
+	*/
+	agent { 
+	    label 'Locale-Master-Node' 
+	    
+	}	
     stages {        
         stage("Compile") {
             steps {
