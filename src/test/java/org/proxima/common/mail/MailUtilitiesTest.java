@@ -6,10 +6,9 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.junit.Test;
-import org.proxima.common.mail.MailUtility;
 
 public class MailUtilitiesTest {
 
@@ -17,15 +16,32 @@ public class MailUtilitiesTest {
 
 	private static String[] cc, ccn, to;
 	private static String singleRecipient;
-
+	private static String simple_message_object ;
+	private static String simple_message_with_attachment_object ;
+	private static String attachmentSourcePathFileName ;
+	private static String attachmentTargetFileName ;
+	private static String simple_message_with_attachment_body ;
+	
+	private final static String MAIL_SIMPLE_OBJECT_KEY = "mail.simple.object";
+	private final static String MAIL_WITH_ATTACHMENTSIMPLE_OBJECT_KEY = "mail.simple.object.with.attachment";
+	private final static String MAIL_WITH_ATTACHMENT_SOURCE_RELATIVE_PATH_FILE_NAME_KEY = "mail.simple.object.with.attachment.source.relative.path.file.name";
+	private final static String MAIL_WITH_ATTACHMENT_FILE_NAME_KEY = "mail.simple.object.with.attachment.target.filename";
+	
+	private final static String MAIL_WITH_ATTACHMENT_MESSAGE_KEY = "mail.simple.object.with.attachment.message";
+	
 	static {
 		try {
 			Properties props = new Properties();
 			props.load(MailUtility.class.getClassLoader().getResourceAsStream(MailUtility.MAILPROPS_FILENAME));
 			ccn = (props.getProperty(MailUtility.MAIL_CCN_RECIPIENT_KEY)).split(",");
 			cc = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT_KEY)).split(",");
-			to = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT_KEY)).split(",");
+			to = (props.getProperty(MailUtility.MAIL_CC_RECIPIENT_KEY)).split(",");			
 			singleRecipient = cc[0];
+			simple_message_object = props.getProperty(MAIL_SIMPLE_OBJECT_KEY);
+			simple_message_with_attachment_object = props.getProperty(MAIL_WITH_ATTACHMENTSIMPLE_OBJECT_KEY);
+			attachmentSourcePathFileName = props.getProperty(MAIL_WITH_ATTACHMENT_SOURCE_RELATIVE_PATH_FILE_NAME_KEY);
+			attachmentTargetFileName = props.getProperty(MAIL_WITH_ATTACHMENT_FILE_NAME_KEY);
+			simple_message_with_attachment_body=props.getProperty(MAIL_WITH_ATTACHMENT_MESSAGE_KEY);
 		} catch (IOException ioe) {
 			LOGGER.error(ioe.getMessage(), ioe);
 		}
@@ -37,7 +53,7 @@ public class MailUtilitiesTest {
 		LOGGER.info("TEST - sendSimpleMail()");
 		LOGGER.info("#########");
 		Boolean check = false;
-		check = MailUtility.sendSimpleMail(to, "Prova e-mail semplice",
+		check = MailUtility.sendSimpleMail(to, simple_message_object,
 				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
 		assertTrue(check);
 	}
@@ -49,7 +65,7 @@ public class MailUtilitiesTest {
 		LOGGER.info("TEST - sendSimpleMail()");
 		LOGGER.info("#########");
 		Boolean check = false;
-		check = MailUtility.sendSimpleMail(singleRecipient, "Prova e-mail semplice",
+		check = MailUtility.sendSimpleMail(singleRecipient, simple_message_object,
 				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
 		assertTrue(check);
 	}
@@ -63,7 +79,7 @@ public class MailUtilitiesTest {
 		LOGGER.info("#########");
 		Boolean check = false;
 		String[] recipients = null;
-		check = MailUtility.sendSimpleMail(recipients, "Prova e-mail semplice",
+		check = MailUtility.sendSimpleMail(recipients, simple_message_object,
 				"<p class=\"abcde\">Test send simple mail avvenuto con successo! </p>");
 		assertFalse(check);
 	}
@@ -132,6 +148,16 @@ public class MailUtilitiesTest {
 		check = MailUtility.sendSimpleMailWithDefaultCcAndCcn(to, "Prova e-email con default CC e CCN",
 				"<p class=\"abcde\">Test send simple mail con default CC e CCN avvenuto con successo!</p>");
 		assertTrue(check);
+	}
+	
+	@Test
+	public void sendSimpleMailWithAttachmentOk() {
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMailWithAttachmentOk()");
+		LOGGER.info("#########");
+		boolean sendMailResult = MailUtility.sendMailWithAttachment(to, simple_message_with_attachment_object, simple_message_with_attachment_body, attachmentSourcePathFileName,
+				attachmentTargetFileName);
+		assertTrue(sendMailResult);
 	}
 
 }
