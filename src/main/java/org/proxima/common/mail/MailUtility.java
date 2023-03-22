@@ -114,13 +114,32 @@ public final class MailUtility {
 	 */
 	public static boolean sendMailWithAttachment(String recipient, String subject, String mess, String attachmentPath, String attachmentName) {
 	    String[] recipients = {recipient};
-	    return sendMailWithAttachment(recipients, subject, mess, attachmentPath, attachmentName);
+	    return sendMailWithAttachment(recipients, null, subject, mess, attachmentPath, attachmentName);
+	}
+	
+	/**
+	 * Provides to send mail with attachment to a single recipient and a single cc recipient
+	 *
+	 * @param recipient E-mail del destinatario
+	 * @param recipient E-mail del destinatario da mettere in cc
+	 * @param subject   Oggetto della e-mail
+	 * @param mess      Testo della e-mail
+	 * @param attachmentPath Path del file da allegare all'e-mail
+	 * @param attachmentName Nome con cui salvare il file allegato all'e-mail
+	 * 
+	 * @return boolean Il metodo ritorna false solo se viene sollevata un'eccezione.
+	 */
+	public static boolean sendMailWithAttachment(String recipient, String ccRecipient, String subject, String mess, String attachmentPath, String attachmentName) {
+	    String[] recipients = {recipient};
+	    String[] ccRecipients = {ccRecipient};
+	    return sendMailWithAttachment(recipients, ccRecipients, subject, mess, attachmentPath, attachmentName);
 	}
 
 	/**
 	 * Provides to send mail with attachment to multiple recipients
 	 *
 	 * @param recipients Multi recipients email addresses
+	 * @param recipients Multi cc recipients email addresses
 	 * @param subject    Email subject
 	 * @param mess       Email text message
 	 * @param attachmentPath Path del file da allegare all'e-mail
@@ -128,7 +147,7 @@ public final class MailUtility {
 	 *
 	 * @return boolean Il metodo ritorna false solo se viene sollevata un'eccezione.
 	 */
-	public static boolean sendMailWithAttachment(String[] recipients, String subject, String mess, String attachmentPath, String attachmentName) {
+	public static boolean sendMailWithAttachment(String[] recipients, String[] ccRecipients, String subject, String mess, String attachmentPath, String attachmentName) {
 	    LOGGER.info("sendMailWithAttachment - START");
 	    boolean sent = true;
 	    try {
@@ -149,7 +168,19 @@ public final class MailUtility {
 	            }
 	        }), Address[]::new);
 	        message.addRecipients(RecipientType.TO, iaRecipients);
-
+	        if (ccRecipients != null) {
+				LOGGER.info("sendMailWithAttachment - DEBUG - converting cc; cc.length: " + ccRecipients.length);
+				Address[] ccAddress = convertArray(ccRecipients, (x -> {
+					try {
+						return new InternetAddress(x);
+					} catch (AddressException e) {
+						LOGGER.error(e.getMessage(), e);
+						e.printStackTrace();
+						return null;
+					}
+				}), Address[]::new);
+				message.addRecipients(RecipientType.CC, ccAddress);
+			}
 	        message.setSubject(subject);
 
 	        MimeMultipart multipart = new MimeMultipart();

@@ -155,7 +155,17 @@ public class MailUtilitiesTest {
 		LOGGER.info("#########");
 		LOGGER.info("TEST - sendSimpleMailWithAttachmentOk()");
 		LOGGER.info("#########");
-		boolean sendMailResult = MailUtility.sendMailWithAttachment(to, simple_message_with_attachment_object, simple_message_with_attachment_body, attachmentSourcePathFileName,
+		boolean sendMailResult = MailUtility.sendMailWithAttachment(to, null, simple_message_with_attachment_object, simple_message_with_attachment_body, attachmentSourcePathFileName,
+				attachmentTargetFileName);
+		assertTrue(sendMailResult);
+	}
+	
+	@Test
+	public void sendSimpleMailWithAttachmentToRecipientAndCCRecipientOk() {
+		LOGGER.info("#########");
+		LOGGER.info("TEST - sendSimpleMailWithAttachmentToRecipientAndCCRecipientOk()");
+		LOGGER.info("#########");
+		boolean sendMailResult = MailUtility.sendMailWithAttachment(to, cc, simple_message_with_attachment_object, simple_message_with_attachment_body, attachmentSourcePathFileName,
 				attachmentTargetFileName);
 		assertTrue(sendMailResult);
 	}
